@@ -24,4 +24,4 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }} 
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Push tag to DockerHub
-      run: docker push dishes-service:latest
+      run: docker push ${{ secrets.DOCKER_NAME }}/dishes-service:latest
