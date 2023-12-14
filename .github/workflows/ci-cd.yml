@@ -8,6 +8,21 @@ on:
 
 jobs:
 
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Prepare for tests
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip install -r requirements.txt
+          docker build . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/dishes-service:latest
+          sleep 5
+      - name: Run tests
+        run: |
+          pytest Dishes/unit_tests.py
+
   build:
 
     runs-on: ubuntu-latest
